@@ -2468,6 +2468,9 @@ class PlayState extends MusicBeatState
 
 	public function triggerEventNote(eventName:String, value1:String, value2:String) {
 		switch(eventName) {
+		  case 'Sound Player':
+		  var value:Int = Std.ParseInt(Value1);
+		  FlxG.sound.play(Paths.sound(Value1));
 			case 'Hey!':
 				var value:Int = 2;
 				switch(value1.toLowerCase().trim()) {
