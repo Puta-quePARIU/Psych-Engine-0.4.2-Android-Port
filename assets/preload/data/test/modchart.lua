@@ -1,0 +1,1 @@
+--Coloca comandos de modchart aq bele?
