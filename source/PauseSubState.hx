@@ -19,7 +19,7 @@ class PauseSubState extends MusicBeatSubstate
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
 
 	var menuItems:Array<String> = [];
-	var menuItemsOG:Array<String> = ['Continuar', 'Reiniciar Musica', 'Escolher dificuldade', 'Editor de Notas', 'Botplay', 'Sair Para Menu'];
+	var menuItemsOG:Array<String> = ['Continuar', 'Reiniciar Musica', 'Escolher Dificuldade', 'Editor de Notas', 'Sair Para Menu'];
 	var difficultyChoices = [];
 	var curSelected:Int = 0;
 
@@ -30,7 +30,7 @@ class PauseSubState extends MusicBeatSubstate
 	public function new(x:Float, y:Float)
 	{
 		super();
-		if(CoolUtil.difficulties.length < 2) menuItemsOG.remove('Change Difficulty'); //No need to change difficulty if there is only one!
+		if(CoolUtil.difficulties.length < 2) menuItemsOG.remove('Escolher Dificuldade'); //No need to change difficulty if there is only one!
 		menuItems = menuItemsOG;
 
 		for (i in 0...CoolUtil.difficulties.length) {
@@ -70,23 +70,7 @@ class PauseSubState extends MusicBeatSubstate
 		blueballedTxt.setFormat(Paths.font('vcr.ttf'), 32);
 		blueballedTxt.updateHitbox();
 		add(blueballedTxt);
-		
-practiceText = new FlxText(20, 15 + 101, 0, "MODO DE PRATICA", 32);
-		practiceText.scrollFactor.set();
-		practiceText.setFormat(Paths.font('vcr.ttf'), 32);
-		practiceText.x = FlxG.width - (practiceText.width + 20);
-		practiceText.updateHitbox();
-		practiceText.visible = PlayState.practiceMode;
-		add(practiceText);
-		
-		botplayText = new FlxText(20, FlxG.height - 40, 0, "BOTPLAY", 32);
-		botplayText.scrollFactor.set();
-		botplayText.setFormat(Paths.font('vcr.ttf'), 32);
-		botplayText.x = FlxG.width - (botplayText.width + 20);
-		botplayText.updateHitbox();
-		botplayText.visible = PlayState.cpuControlled;
-		add(botplayText);
-		
+
 		blueballedTxt.alpha = 0;
 		levelDifficulty.alpha = 0;
 		levelInfo.alpha = 0;
@@ -166,7 +150,7 @@ practiceText = new FlxText(20, 15 + 101, 0, "MODO DE PRATICA", 32);
 			{
 				case "Continuar":
 					close();
-				case 'Escolher dificuldade':
+				case 'Escolher Dificuldade':
 					menuItems = difficultyChoices;
 					regenMenu();
 				case "Editor de Notas":
@@ -175,10 +159,6 @@ practiceText = new FlxText(20, 15 + 101, 0, "MODO DE PRATICA", 32);
 					CustomFadeTransition.nextCamera = transCamera;
 					MusicBeatState.resetState();
 					FlxG.sound.music.volume = 0;
-					case 'Botplay':
-					PlayState.cpuControlled = !PlayState.cpuControlled;
-					PlayState.usedPractice = true;
-					botplayText.visible = PlayState.cpuControlled;
 				case "Sair Para Menu":
 					PlayState.deathCounter = 0;
 					PlayState.seenCutscene = false;
